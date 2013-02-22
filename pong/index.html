@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" /> 
+	<title>Pong</title>
+    <style>
+      #myCanvas { 
+        border: 1px solid black;
+      }
+    </style>
+    <script>
+      var canvas;
+      var context;
+	  var hintergrund1 = new Image();
+	  var hintergrund2 = new Image();
+	  var hintergrund3 = new Image();
+	  var hintergrund4 = new Image();
+	  var auswahl = 1;
+	  
+	  
+	  function makieren() {
+	  
+		if (auswahl == 1) { 
+		  context.drawImage(hintergrund1, 0, 0);
+		}
+		if (auswahl == 2) {
+		  context.drawImage(hintergrund2, 0, 0);
+		}
+		if (auswahl == 3) {
+		  context.drawImage(hintergrund3, 0, 0);
+	    }
+		else if (auswahl == 4) {
+		  context.drawImage(hintergrund4, 0, 0);
+		}
+		
+		document.onkeydown = function(e) {
+          e = e || window.event;
+          if(e.keyCode == '38' && auswahl >= 2 ) {
+            auswahl--;
+          }
+		  if(e.keyCode == '40' && auswahl <= 3 ) {
+            auswahl++;
+          }
+		  if(e.keyCode == '13' && auswahl == 1) {
+		    window.open('einzelspieler.html', '_self');
+		  }
+		  if(e.keyCode == '13' && auswahl == 2) {
+		    window.open('mehrspieler.html', '_self');		  
+		  }
+		  if(e.keyCode == '13' && auswahl == 3) {
+		    window.open('about:blank','_self');
+		  }
+		  else if(e.keyCode == '13' && auswahl == 4) {
+		    window.open('hilfe.html', '_self');
+		  }
+        }
+		
+		context.fillText('Hilfe', 200, 450);
+
+		
+		setTimeout(makieren, 10);
+	  }
+	  
+
+		
+		
+      window.onload = function(){
+	    hintergrund1.src = 'bilder/hintergrund1.png'
+	    hintergrund2.src = 'bilder/hintergrund2.png'
+	    hintergrund3.src = 'bilder/hintergrund3.png'
+		hintergrund4.src = 'bilder/hintergrund4.png'
+        canvas = document.getElementById("myCanvas");
+        context = canvas.getContext("2d");
+		context.font = "normal 48px Courier New";
+		context.fillStyle = '#969696';
+		
+		makieren()
+		
+      };
+    </script>
+  </head>
+  <body onmousedown="return false;">
+    <canvas id="myCanvas" width="800" height="600">
+    </canvas>
+  </body>
+</html>
